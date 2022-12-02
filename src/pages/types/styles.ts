@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HomeContainer = styled.main`
+export const TypesContainer = styled.main`
     flex: 1;
     padding: 0 3.5rem 3.5rem 3.5rem;
 
@@ -19,7 +19,7 @@ export const HomeContainer = styled.main`
     }
 `;
 
-export const LogList = styled.div`
+export const TypesList = styled.div`
     flex: 1;
     overflow: auto;
     margin-top: 2rem;
@@ -57,9 +57,17 @@ export const LogList = styled.div`
             text-align: left;
 
             &:first-child {
-                width: 40%;
                 padding-left: 1.5rem;
             }
+
+            &:nth-child(2) {
+                width: 60%;
+            }
+
+            &:nth-child(3) button {
+                margin-right: 5px;
+            }
+
 
             &:last-child {
                 padding-right: 1.5rem;
@@ -67,37 +75,5 @@ export const LogList = styled.div`
         }
 
        
-    }
-`;
-
-export const BlocDetails = styled.div`
-    flex-direction: row;
-    margin-left: 10px;
-`;
-
-export const Blocs = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    margin-top: 30px;
-`;
-
-export const Bloc = styled.div`
-    background-color: ${props => props.theme["gray-700"]};
-    width: 300px;
-    height: 130px;
-    border-radius: 5px;
-    padding: 3rem;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    margin-right: 17px;
-
-    span {
-        font-size: 0.87rem;
-    }
-
-    h3 {
-        font-size: 1.3rem;
     }
 `;

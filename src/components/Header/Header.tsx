@@ -9,7 +9,7 @@ export function Header() {
     const {signOut} = useAuth();
     return (
         <HeaderContainer>
-            <h1>LW</h1>
+            <h1>MP</h1>
 
             <button><FaSignOutAlt color={defaultTheme['gray-400']} size={20} onClick={signOut} /></button>
          </HeaderContainer>
