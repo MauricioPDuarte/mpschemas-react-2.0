@@ -1,27 +1,21 @@
 import styled, {css} from 'styled-components';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'success';
+
 
 interface ButtonContainerProps {
-    variant: ButtonVariant;
+    typeStyle: 'solid' | 'outlined';
 }
 
-const buttonVariants = {
-    primary: 'purple',
-    secondary: 'orange',
-    danger: 'red',
-    success: 'green'
-}
 
 export const ButtonContainer = styled.button<ButtonContainerProps>`
-    width: 100px;
+    max-width: 100px;
+    padding: 12px 20px;
     height: 40px;
-    background-color: ${props => props.theme['blue-500']};
-    color: ${props => props.theme.white};
-    border: 0;
+    background-color:  ${props => props.typeStyle == "solid" ? props.theme['blue-500'] : 'transparent'};
+    color: ${props => props.typeStyle == "solid" ? props.theme.white :  props.theme['blue-500']};
+    border:  1px solid ${props => props.typeStyle == "solid" ?  'transparent' : props.theme['blue-500']};
     font-size: 12px;
     border-radius: 4px;
-    margin: 8px 0;
    
 
 `;

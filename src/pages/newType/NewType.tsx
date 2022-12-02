@@ -1,11 +1,11 @@
-import { Form, NewTypeContainer } from './styles';
+import { Form, NewTypeContainer, ActionsPage } from './styles';
 import { Header } from '../../components/Header/Header';
 import { useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button/Button';
 import { Divider } from '../../components/Divider/Divider';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import api from '../../services/api';
 
 interface TypeDevide {
@@ -15,6 +15,7 @@ interface TypeDevide {
 
 export function NewType() {
   const [typeDevice, setTypeDevice] = useState<TypeDevide>({} as TypeDevide);
+  const navigate = useNavigate();
 
   let { id } = useParams(); 
 
@@ -132,9 +133,14 @@ export function NewType() {
            
         
               <Divider mt={20}/>
-              <Button type="submit" disabled={isSubmitting} loading={isSubmitting}>
-                Salvar
-              </Button>
+              <ActionsPage>
+                <Button typeStyle='outlined' onClick={() => navigate('/tipos_dispositivos')}>Cancelar</Button>
+                <Divider mr={10}/>
+                <Button type="submit" disabled={isSubmitting} loading={isSubmitting}>
+                  Salvar
+                </Button>
+              </ActionsPage>
+      
             </Form>
            )}
          </Formik>

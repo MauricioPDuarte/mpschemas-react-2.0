@@ -1,10 +1,11 @@
-import { TypesContainer, TypesList } from './styles';
+import { TypesContainer, TypesList, HeaderTable } from './styles';
 import { Header } from '../../components/Header/Header';
 import { useEffect, useState } from 'react';
 import api from '../../services/api';
 import { Button } from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { Divider } from '../../components/Divider/Divider';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 
 interface TypesDevive {
@@ -50,9 +51,12 @@ export function Types() {
         <Header />
         <TypesContainer>
 
-          <h1>Tipos dispositivos</h1>
 
-          <Button onClick={() =>  navigate(`/novo_tipo_dispositivo/`)}>Novo</Button>
+          <HeaderTable>
+            <h1>Tipos dispositivos</h1>
+            <Button onClick={() =>  navigate(`/novo_tipo_dispositivo/`)}>Novo</Button>
+          </HeaderTable>
+ 
 
           <TypesList>
             <table>
@@ -71,8 +75,9 @@ export function Types() {
                       <td>{type.id}</td>
                       <td>{type.name}</td>
                       <td>
-                        <Button onClick={() => remove(type.id)}>Excluir</Button>
-                        <Button onClick={() => navigate(`/novo_tipo_dispositivo/${type.id}`)}>Editar</Button>
+                        <Button onClick={() => remove(type.id)}><FaTrash /></Button>
+                    
+                        <Button onClick={() => navigate(`/novo_tipo_dispositivo/${type.id}`)}><FaEdit /></Button>
                       </td>
                
                   </tr>

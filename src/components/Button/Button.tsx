@@ -1,14 +1,18 @@
-import { ButtonContainer, ButtonVariant } from './styles';
+import { ButtonContainer } from './styles';
+
+
+
+
 
 interface ButtonProps {
-    variant?: ButtonVariant;
+    typeStyle?: 'solid' | 'outlined';
     onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined
-    children?: string;
+    children?: string | JSX.Element;
     type?: "button" | "submit" | "reset" | undefined;
     disabled?:  boolean | undefined;
     loading?: boolean;
 }
 
-export function Button({variant = 'primary', onClick, children, type, disabled, loading = false}: ButtonProps) {
-    return <ButtonContainer disabled={disabled} type={type} variant={variant} onClick={onClick}>{loading ?  'Carregando...': children }</ButtonContainer>
+export function Button({typeStyle = 'solid', onClick, children, type, disabled, loading = false}: ButtonProps) {
+    return <ButtonContainer disabled={disabled} type={type} typeStyle={typeStyle} onClick={onClick}>{loading ?  'Carregando...': children }</ButtonContainer>
 }
