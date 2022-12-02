@@ -13,6 +13,7 @@ export function Router() {
             <Route path='/login' element={<SignIn />} />
             <Route path='/tipos_dispositivos' element={<Types />}/>
             <Route path='/novo_tipo_dispositivo/:id' element={<NewType />}/>
+            <Route path='/novo_tipo_dispositivo' element={<NewType />}/>
             
             <Route path='/' element={<ProtectedRoute />}>
            

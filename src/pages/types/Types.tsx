@@ -49,8 +49,10 @@ export function Types() {
       <>
         <Header />
         <TypesContainer>
-        
+
           <h1>Tipos dispositivos</h1>
+
+          <Button onClick={() =>  navigate(`/novo_tipo_dispositivo/`)}>Novo</Button>
 
           <TypesList>
             <table>

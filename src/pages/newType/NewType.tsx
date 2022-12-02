@@ -19,6 +19,8 @@ export function NewType() {
   let { id } = useParams(); 
 
   async function findTypeDevice() {
+    
+
     api.get(`/types_device/${id}`)
     .then((res) => {
      console.log(res);
@@ -44,8 +46,7 @@ export function NewType() {
         alert('Item salvo com sucesso!');
       })
       .catch((err) => {
-        console.log(err);
-        const message = err.data["data"];
+        const message = err.response.data["data"];
 
         if (message && message == "ALREADY_EXISTS")
           alert('Já existe um tipo dispositivo com esse nome!')
@@ -55,13 +56,17 @@ export function NewType() {
         
       });
     } else {
-      api.post(`/types_device/0`, valuesJson)
+      api.post(`/types_device/0`, valuesJson, {
+        headers: {
+           'Content-Type': 'application/json',
+        }
+      })
       .then((res) => {
         alert('Item salvo com sucesso!');
       })
       .catch((err) => {
         console.log(err);
-        const message = err.data["data"];
+        const message = err.response.data["data"];
 
 
 
@@ -76,7 +81,8 @@ export function NewType() {
    }
 
   useEffect(() => {
-    findTypeDevice();
+    if(id != null)
+      findTypeDevice();
   }, []);
 
     return (
