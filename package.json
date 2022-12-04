@@ -9,19 +9,25 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.4.2",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "axios": "^1.2.0",
     "formik": "^2.2.9",
+    "framer-motion": "^7.6.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
     "react-router-dom": "^6.4.3",
     "react-spring": "8.0.27",
+    "react-table": "^7.8.0",
     "styled-components": "^5.3.6",
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
+    "@types/react-table": "^7.7.12",
     "@types/styled-components": "^5.1.26",
     "@vitejs/plugin-react": "^2.2.0",
     "typescript": "^4.6.4",

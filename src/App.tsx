@@ -1,3 +1,4 @@
+import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import AppProvider from "./hooks";
@@ -9,14 +10,16 @@ import { defaultTheme } from "./styles/themes/default";
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
+      <ChakraProvider>
         <BrowserRouter>
-      <AppProvider>
-            <Router />
-      </AppProvider>
+          <AppProvider>
+                <Router />
+          </AppProvider>
         </BrowserRouter>
-   
-
-      <GlobalStyle />
+    
+        <GlobalStyle />
+      </ChakraProvider>
+    
     </ThemeProvider>
 
   )
