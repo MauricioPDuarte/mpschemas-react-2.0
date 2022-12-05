@@ -34,7 +34,7 @@ export function SignIn() {
 
     React.useEffect(() => { 
         if(user) {
-          navigate('/dashboard')
+          navigate('/esquemas')
         }
       }, [user]);
 

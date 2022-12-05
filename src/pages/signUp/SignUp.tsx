@@ -17,26 +17,77 @@ import {
   useBreakpointValue,
   useColorModeValue,
   useMergeRefs,
+  useToast,
 } from '@chakra-ui/react'
 import InputMask from "react-input-mask";
 import { Formik, validateYupSchema } from 'formik';
 import * as React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth';
+import api from '../../services/api';
 
 interface User {
   email: string;
   name: string;
   phone: string;
   password: string;
+  path: string;
+  file: any;
 }
 
 export function SignUp() {
   const navigate = useNavigate();
   const [user, setUset] = React.useState<User>({} as User)
+  const toast = useToast()
 
   function handleSignUp(values: User) {
-   
+    var bodyFormData = new FormData();
+    bodyFormData.append('name', values.name);
+    bodyFormData.append('phone', values.phone);
+    bodyFormData.append('email', values.email);
+    bodyFormData.append('password', values.password);
+    bodyFormData.append('file', values.file);
+
+    api.post(`/users/0`, bodyFormData, {
+      headers: {
+         'Content-Type': 'multipart/form-data',
+      }
+    })
+    .then((res) => {
+      toast({
+        title: 'Sucesso',
+        description: "Usuário cadastrado com sucesso, faça seu login!",
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+        position: 'top-right'
+      })
+
+      navigate('/login');
+    })
+    .catch((err) => {
+      const message = err.response.data["data"];
+
+      if(message === "EMAIL_EXISTS") {
+        toast({
+          title: 'Erro',
+          description: "Já existe um usuário com esse e-mail!",
+          status: 'error',
+          duration: 2000,
+          isClosable: true,
+          position: 'top-right'
+        })
+      } else {
+        toast({
+          title: 'Erro',
+          description: "Ocorreu um erro ao cadastrar o usuário!",
+          status: 'error',
+          duration: 2000,
+          isClosable: true,
+          position: 'top-right'
+        })
+      }
+    });
   }
 
   function isValidEmail(email: string) {
@@ -114,6 +165,7 @@ export function SignUp() {
               touched,
               handleChange,
               handleBlur,
+              setFieldValue,
               handleSubmit,
               isSubmitting,
             }) => (
@@ -174,6 +226,23 @@ export function SignUp() {
                   size='lg'
                 />
               <FormErrorMessage>{errors.password}</FormErrorMessage>
+            </FormControl>
+
+            <FormControl isInvalid={errors.path != null} mt="10px">
+              <FormLabel>Foto</FormLabel>
+              
+              <Input
+                  type="file"
+                  name="file"
+                  onChange={(event) => {
+                    setFieldValue("file", event.currentTarget.files[0]);
+                  }}
+                  onBlur={handleBlur}
+                  size='lg'
+                /> 
+              <Text fontSize={12}>{user.path}</Text>
+              <FormErrorMessage>{errors.path}</FormErrorMessage>
+           
             </FormControl>
                 
             <Stack mt={5} direction='row' spacing={4} align='center' justifyContent='right'>

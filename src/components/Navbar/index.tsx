@@ -46,7 +46,6 @@ interface LinkItemProps {
   link: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome, link: '/dashboard'},
   { name: 'Esquemas', icon: FiList, link: '/esquemas'},
   { name: 'Usuários', icon: FiUsers, link: '/usuarios'},
   { name: 'Tipos Dispositivos', icon: FiCompass, link: '/tipos_dispositivos'},
@@ -178,6 +177,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
       justifyContent={{ base: 'space-between', md: 'flex-end' }}
       {...rest}>
+        <Avatar src={'http://127.0.0.1:5000/files/' + user.path} name={user.name} />
       <IconButton
         display={{ base: 'flex', md: 'none' }}
         onClick={onOpen}

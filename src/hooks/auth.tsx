@@ -7,6 +7,7 @@ import { useToast } from './toast';
 interface User {
   name: string;
   email: string;
+  path: string;
 }
 
 interface AuthState {
@@ -65,7 +66,7 @@ export const AuthProvider: React.FC<Props> = ({children}) => {
   
       setData({ token, user });
   
-      navigate('/dashboard');
+      navigate('/esquemas');
     })
     .catch(() => {
       alert('Revise suas credenciais')

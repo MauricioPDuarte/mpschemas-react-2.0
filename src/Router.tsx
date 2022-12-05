@@ -12,7 +12,6 @@ import { NewModel } from './pages/newModel';
 import {  Schemas } from './pages/listSchemas';
 import { NewSchema } from './pages/newSchema';
 import { SignIn } from './pages/signin';
-import { Dashboard } from './pages/dashboard';
 import FAQ from './pages/faq';
 import { ForgotPassword } from './pages/forgotPassword';
 import { ChangePassword } from './pages/changePassword';
@@ -35,7 +34,6 @@ export function Router() {
 
 
             <Route  element={<DefaultLayout />}>
-                <Route path='/dashboard' element={<Dashboard />}/>
                 <Route path='/usuarios' element={<Users />}/>
                 <Route path='/marcas' element={<Brands />}/>
                 <Route path='/modelos' element={<Models />}/>
