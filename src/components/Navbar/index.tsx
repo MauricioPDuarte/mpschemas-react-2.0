@@ -33,10 +33,12 @@ import {
   FiChevronDown,
   FiUsers,
   FiList,
+  FiHelpCircle,
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
 import { FaCreativeCommonsPd } from 'react-icons/fa';
+import { useAuth } from '../../hooks/auth';
 
 interface LinkItemProps {
   name: string;
@@ -44,12 +46,13 @@ interface LinkItemProps {
   link: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome, link: ''},
+  { name: 'Home', icon: FiHome, link: '/dashboard'},
   { name: 'Esquemas', icon: FiList, link: '/esquemas'},
   { name: 'Usuários', icon: FiUsers, link: '/usuarios'},
   { name: 'Tipos Dispositivos', icon: FiCompass, link: '/tipos_dispositivos'},
   { name: 'Marcas', icon: FaCreativeCommonsPd, link: '/marcas'},
   { name: 'Modelos', icon: FiSettings, link: '/modelos'},
+  { name: 'FAQ', icon: FiHelpCircle, link: '/faq'},
 ];
 
 export default function SidebarWithHeader({
@@ -57,7 +60,9 @@ export default function SidebarWithHeader({
 }: {
   children: ReactNode;
 }) {
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent
@@ -160,6 +165,8 @@ interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const { user, signOut } = useAuth();
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -188,12 +195,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       </Text>
 
       <HStack spacing={{ base: '0', md: '6' }}>
-        <IconButton
-          size="lg"
-          variant="ghost"
-          aria-label="open menu"
-          icon={<FiBell />}
-        />
+   
         <Flex alignItems={'center'}>
           <Menu>
             <MenuButton
@@ -201,20 +203,15 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               transition="all 0.3s"
               _focus={{ boxShadow: 'none' }}>
               <HStack>
-                <Avatar
-                  size={'sm'}
-                  src={
-                    'https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                  }
-                />
+              
                 <VStack
                   display={{ base: 'none', md: 'flex' }}
                   alignItems="flex-start"
                   spacing="1px"
                   ml="2">
-                  <Text fontSize="sm">Justina Clark</Text>
+                  <Text fontSize="sm">{user.name}</Text>
                   <Text fontSize="xs" color="gray.600">
-                    Admin
+                    {user.email}
                   </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
@@ -225,11 +222,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
             <MenuList
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}>
-              <MenuItem>Profile</MenuItem>
-              <MenuItem>Settings</MenuItem>
-              <MenuItem>Billing</MenuItem>
-              <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+     
+              <MenuItem onClick={() => signOut()}>Sair</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

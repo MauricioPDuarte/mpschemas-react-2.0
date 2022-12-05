@@ -4,9 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { useToast } from './toast';
 
+interface User {
+  name: string;
+  email: string;
+}
+
 interface AuthState {
   token: string;
-  user: Object;
+  user: User;
 }
 
 interface SignInCredencials {
@@ -15,7 +20,7 @@ interface SignInCredencials {
 }
 
 interface IAuthContext {
-  user: Object;
+  user: User;
   signIn(credentials: SignInCredencials): Promise<void>;
   signOut(): void;
 }
@@ -30,9 +35,16 @@ const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 export const AuthProvider: React.FC<Props> = ({children}) => {
   const navigate = useNavigate();
 
+  window.addEventListener('storage', () => {
+    const token = localStorage.getItem('@MPSchemas:token');
+
+    if (!token)
+      signOut();
+  });
+
   const [data, setData] = useState<AuthState>(() => {
-    const token = localStorage.getItem('@LogWorking:token');
-    const user = localStorage.getItem('@LogWorking:user');
+    const token = localStorage.getItem('@MPSchemas:token');
+    const user = localStorage.getItem('@MPSchemas:user');
 
     if (token && user) {
       return { token, user: JSON.parse(user) };
@@ -44,12 +56,12 @@ export const AuthProvider: React.FC<Props> = ({children}) => {
 
   const signIn = useCallback(async ({ email, password }: SignInCredencials) => {
     
-    await api.post('sessions', { email, password })
+    await api.post('login', { email, password })
     .then((response) => {
       const { token, user } = response.data;
 
-      localStorage.setItem('@LogWorking:token', token);
-      localStorage.setItem('@LogWorking:user', JSON.stringify(user));
+      localStorage.setItem('@MPSchemas:token', token);
+      localStorage.setItem('@MPSchemas:user', JSON.stringify(user));
   
       setData({ token, user });
   
@@ -63,8 +75,8 @@ export const AuthProvider: React.FC<Props> = ({children}) => {
   }, []);
 
   const signOut = useCallback(() => {
-    localStorage.removeItem('@LogWorking:token');
-    localStorage.removeItem('@LogWorking:user');
+    localStorage.removeItem('@MPSchemas:token');
+    localStorage.removeItem('@MPSchemas:user');
 
     
     setData({} as AuthState);
