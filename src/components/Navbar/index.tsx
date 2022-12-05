@@ -32,6 +32,7 @@ import {
   FiBell,
   FiChevronDown,
   FiUsers,
+  FiList,
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
@@ -44,6 +45,7 @@ interface LinkItemProps {
 }
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, link: ''},
+  { name: 'Esquemas', icon: FiList, link: '/esquemas'},
   { name: 'Usuários', icon: FiUsers, link: '/usuarios'},
   { name: 'Tipos Dispositivos', icon: FiCompass, link: '/tipos_dispositivos'},
   { name: 'Marcas', icon: FaCreativeCommonsPd, link: '/marcas'},

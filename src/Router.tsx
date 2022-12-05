@@ -10,6 +10,8 @@ import { Brands } from './pages/brands';
 import { NewBrand } from './pages/newBrand';
 import { Models } from './pages/listModels';
 import { NewModel } from './pages/newModel';
+import {  Schemas } from './pages/listSchemas';
+import { NewSchema } from './pages/newSchema';
 
 
 
@@ -29,6 +31,9 @@ export function Router() {
                 <Route path='/usuarios' element={<Users />}/>
                 <Route path='/marcas' element={<Brands />}/>
                 <Route path='/modelos' element={<Models />}/>
+                <Route path='/esquemas' element={<Schemas />}/>
+                <Route path='/novo_esquema' element={<NewSchema />}/>
+                <Route path='/novo_esquema/:id' element={<NewSchema />}/>
                 <Route path='/nova_marca' element={<NewBrand />}/>
                 <Route path='/nova_marca/:id' element={<NewBrand />}/>
                 <Route path='/novo_modelo/:id' element={<NewModel />}/>
